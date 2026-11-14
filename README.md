@@ -4,19 +4,37 @@
 
 last30days Hub turns a research topic into a structured, source-backed report. It combines Gemini-assisted query planning, a source-collection CLI, date and URL checks, and a lightweight local web interface.
 
-> **Current project state:** The application is designed to run locally on Windows. The interface and generated reports are currently in Turkish; this README is written in English for project presentation.
+> **Current project state:** The application is designed to run locally on Windows. The interface and generated reports are currently in Turkish; this README is written in English for project presentation. The Last30Days collection engine is linked as a Git submodule and remains maintained in its own upstream repository.
 
 ## Screenshots
 
-### Research dashboard
+The repository includes six screenshots of the application. The first four are the original application captures, followed by the two cleaned presentation previews.
+
+### 1. Application view — 22:43:22
+
+<img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224322.png" alt="last30days Hub screenshot 1" width="100%" />
+
+### 2. Application view — 22:43:38
+
+<img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224338.png" alt="last30days Hub screenshot 2" width="100%" />
+
+### 3. Application view — 22:43:53
+
+<img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224353.png" alt="last30days Hub screenshot 3" width="100%" />
+
+### 4. Application view — 22:44:03
+
+<img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224403.png" alt="last30days Hub screenshot 4" width="100%" />
+
+### 5. Dashboard presentation preview
 
 ![last30days Hub research dashboard](screenshots/dashboard.png)
 
-### Report view
+### 6. Report presentation preview
 
 ![last30days Hub report view](screenshots/report-view-demo.png)
 
-> **Screenshot note:** These are interface previews. The dashboard history and connection indicators are illustrative, and the report view contains clearly marked sample content rather than a live research result.
+> **Screenshot note:** The four timestamped images are the original screenshots supplied with the project. The dashboard and report presentation previews are supplementary visuals; the report preview contains sample content rather than a live research result.
 
 ## What it does
 
@@ -93,17 +111,31 @@ The requested length is a target, not a guarantee. The amount of available evide
 ## Requirements
 
 - Windows with PowerShell
-- Python 3.13 (the development environment used for this project)
+- Python 3.13 (the development environment used for this project; the upstream collector requires Python 3.12 or newer)
 - A Gemini API key
 - A Brave Search API key for the configured collection workflow
-- The external Last30Days CLI project, with its `last30days.py` script available inside the `last30days-repo/` directory
-- The dependencies required by that CLI project
+- Git, to clone the project and initialize its Last30Days submodule
 
-The Hub expects to find `last30days.py` somewhere inside `last30days-repo/`. The upstream CLI is a separate dependency and is not included in this README package. Add it to your project or document its installation separately, and check its licence before redistributing its source code.
+The source-collection engine is included as a **Git submodule** that points to the upstream project: [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill). The Hub expects to find `last30days.py` inside that submodule. The upstream project remains separate and retains its own maintenance and license terms.
 
 ## Setup
 
-### 1. Create a virtual environment
+### 1. Clone the project with its submodule
+
+Use `--recurse-submodules` so Git downloads both the Hub and the required collection engine:
+
+```powershell
+git clone --recurse-submodules https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY>.git
+cd <YOUR_REPOSITORY>
+```
+
+If you already cloned the Hub without its submodule, initialize it with:
+
+```powershell
+git submodule update --init --recursive
+```
+
+### 2. Create a virtual environment and install Hub dependencies
 
 ```powershell
 py -3.13 -m venv venv
@@ -112,18 +144,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 2. Add the Last30Days CLI dependency
-
-Place the CLI project in the following folder:
-
-```text
-last30days-hub/
-└── last30days-repo/
-    └── ...
-        └── last30days.py
-```
-
-Install any additional packages required by the CLI in the same virtual environment, following that project's instructions.
+The collection engine is located at `last30days-repo/skills/last30days/scripts/last30days.py`. Review the [upstream project documentation](https://github.com/mvanhorn/last30days-skill) for its own setup notes and optional source integrations.
 
 ### 3. Configure API keys
 
@@ -161,18 +182,19 @@ http://127.0.0.1:8765
 
 ```text
 last30days-hub/
-├── core.py                 # Research workflow and report generation
-├── server.py               # Local HTTP server and API routes
-├── ui.html                  # Web interface
-├── last30days.vbs           # Optional Windows background launcher
 ├── .env.example             # Environment variable template
-├── requirements.txt        # Hub Python dependencies
-├── last30days-repo/         # External Last30Days CLI dependency
-├── reports/                 # Saved report JSON files (local data)
-├── repo-config/             # CLI configuration (local data)
-├── repo-output/             # CLI output and memory (local data)
-└── screenshots/             # README interface previews
+├── .gitignore               # Excludes secrets and local runtime data
+├── .gitmodules              # Last30Days submodule configuration
+├── README.md                # Project documentation
+├── core.py                  # Research workflow and report generation
+├── requirements.txt         # Hub Python dependencies
+├── server.py                # Local HTTP server and API routes
+├── ui.html                  # Web interface
+├── last30days-repo/         # Git submodule: upstream collection engine
+└── screenshots/             # Six project screenshots
 ```
+
+Runtime folders such as `reports/`, `repo-config/`, and `repo-output/` are created locally when needed and are excluded from Git.
 
 ## Security and privacy notes
 
