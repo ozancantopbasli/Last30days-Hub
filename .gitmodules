@@ -1,0 +1,3 @@
+[submodule "last30days-repo"]
+	path = last30days-repo
+	url = https://github.com/mvanhorn/last30days-skill.git
