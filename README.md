@@ -10,19 +10,19 @@ last30days Hub turns a research topic into a structured, source-backed report. I
 
 The repository includes six screenshots of the application. The first four are the original application captures, followed by the two cleaned presentation previews.
 
-### 1. Application view — 22:43:22
+### 1. Application view 
 
 <img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224322.png" alt="last30days Hub screenshot 1" width="100%" />
 
-### 2. Application view — 22:43:38
+### 2. Application view 
 
 <img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224338.png" alt="last30days Hub screenshot 2" width="100%" />
 
-### 3. Application view — 22:43:53
+### 3. Application view 
 
 <img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224353.png" alt="last30days Hub screenshot 3" width="100%" />
 
-### 4. Application view — 22:44:03
+### 4. Application view 
 
 <img src="screenshots/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-11-14%20224403.png" alt="last30days Hub screenshot 4" width="100%" />
 
